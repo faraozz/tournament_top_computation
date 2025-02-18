@@ -15,4 +15,14 @@ class Tournament:
     
     def _initialize_players(self) -> List[Player]:
         """Initialize the list of players based on the number_of_players."""
-        return [Player(player_id=i) for i in range(self.number_of_players)] 
+        return [Player(player_id=i) for i in range(self.number_of_players)]
+    
+    def get_rankings(self) -> List[Player]:
+        """
+        Return players sorted by points and tiebreaker.
+        """
+        return sorted(
+            self.players,
+            key=lambda p: (p.get_points(), p.calculate_tiebreaker()),
+            reverse=True
+        ) 
